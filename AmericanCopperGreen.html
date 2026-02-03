@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luvigo - American Collection 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Playfair Display', serif;
+        }
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('artisan.jpeg') center/cover fixed no-repeat;
+            overflow-x: hidden;
+        }
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('America.jpg') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0 2rem;
+        }
+        .hero-title-container {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.1s;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .hero-main-title {
+            font-size: 3.2rem;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            text-transform: capitalize;
+        }
+        .hero-sub-title {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Roboto', sans-serif;
+            opacity: 0.9;
+        }
+        .brand-intro {
+            padding: 8rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .brand-intro.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .brand-intro-text {
+            font-size: 1.5rem;
+            color: #f0f0f0;
+            font-weight: 400;
+            letter-spacing: 0.8px;
+            line-height: 1.9;
+            font-family: 'Playfair Display', serif;
+        }
+        .brand-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f0f0f0;
+            display: inline-block;
+            position: relative;
+            margin: 0 0.3rem;
+        }
+        .brand-name::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #d4af37;
+            transition: width 0.8s ease;
+        }
+        .brand-intro.active .brand-name::after {
+            width: 100%;
+        }
+        .brand-origin {
+            font-style: italic;
+            color: #e0e0e0;
+            font-weight: 500;
+        }
+        .product-feature {
+            padding: 4rem 2rem;
+            background-color: white;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 5rem;
+        }
+        .feature-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+        }
+        .feature-img {
+            flex: 1 1 400px;
+        }
+        .feature-img img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        .feature-img-caption {
+            font-size: 0.9rem;
+            color: #777;
+            text-align: center;
+            margin-top: 0.8rem;
+            font-family: 'Roboto', sans-serif;
+        }
+        .feature-content {
+            flex: 1 1 400px;
+        }
+        .feature-content h2 {
+            font-size: 1.8rem;
+            color: #222;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            font-family: 'Playfair Display', serif;
+        }
+        .feature-content p {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            font-family: 'Roboto', sans-serif;
+        }
+        .subscribe {
+            padding: 5rem 2rem;
+            background-color: #2c2c2c;
+            color: white;
+            text-align: center;
+        }
+        .subscribe h3 {
+            font-size: 2.2rem; 
+            font-weight: 300;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .subscribe h3.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .subscribe-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .subscribe-input {
+            flex: 1;
+            padding: 1rem 1.2rem;
+            border: 1px solid #d4af37; 
+            background-color: #f8f9fa; 
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+            outline: none;
+            font-family: 'Roboto', sans-serif;
+        }
+        .subscribe-btn {
+            padding: 1rem 2rem;
+            background-color: #e6c64a; 
+            color: #2c2c2c; 
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+        .subscribe-btn:hover {
+            background-color: #d4af37; 
+        }
+        .privacy-text {
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            color: #999;
+        }
+        .privacy-text a {
+            color: #999;
+            text-decoration: none;
+        }
+        #privacyPolicy p {
+            color: #999;
+        }
+        @media (max-width: 768px) {
+            .hero-main-title {
+                font-size: 2rem;
+            }
+            .hero-sub-title {
+                font-size: 1.2rem;
+            }
+            .brand-intro-text {
+                font-size: 1.2rem;
+            }
+            .brand-name {
+                font-size: 1.5rem;
+            }
+            .subscribe-form {
+                flex-direction: column;
+            }
+            .subscribe-input {
+                border-radius: 4px;
+            }
+            .subscribe-btn {
+                border-radius: 4px;
+                margin-top: 1rem;
+            }
+        }
+        .hero.scrolled .hero-title-container {
+            transform: translateY(-100px) scale(0.9);
+            opacity: 0.7;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;500&display=swap'); 
+        .float-subscribe {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            z-index: 9999;
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 380px;
+        }
+        .float-tip {
+            font-size: 1.1rem;
+            color: #d4af37;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .float-subscribe-form {
+            display: flex;
+            gap: 0.8rem;
+        }
+        .float-subscribe-input {
+            flex: 1;
+            padding: 1rem 1.2rem;
+            border: 1px solid #d4af37;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            outline: none;
+            font-size: 1rem;
+        }
+        .float-subscribe-btn {
+            padding: 1rem 1.2rem;
+            background-color: #e6c64a;
+            color: #2c2c2c;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            white-space: nowrap;
+        }
+        .float-subscribe-btn:hover {
+            background-color: #d4af37;
+        }
+        @media (max-width: 768px) {
+            .float-subscribe {
+                width: calc(100% - 40px);
+                left: 20px;
+                bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero" id="hero">
+        <div class="hero-title-container">
+            <h1 class="hero-main-title">American Collection 2026</h1>
+            <p class="hero-sub-title">Cultural Marketing Campaign</p>
+        </div>
+    </section>
+    <section class="brand-intro" id="brandIntro">
+        <p class="brand-intro-text">
+            <span class="brand-name">Luvigo</span> 
+            <span class="brand-origin">from Sweden</span>, 
+            with elegance and timeless sophistication, 
+            renowned for modern design and refined aesthetic.
+        </p>
+    </section>
+    <section class="product-feature">
+        <div class="feature-container">
+            <div class="feature-img">
+                <img src="design1.png" 
+                     alt="Luvigo's American Copper Green Bag">
+                <p class="feature-img-caption"><em>Luvigo</em>'s American Copper Green Bag for Cultural Marketing Campaign</p>
+            </div>
+            <div class="feature-content">
+                <h2><em>Luvigo</em>'s 2026 American Collection: Where Design Meets Culture</h2>
+                <p>The 2026 American Collection marks <em>Luvigo</em>'s most ambitious cultural marketing campaign to date, blending Swedish minimalism with American culture.</p>
+                <p>Each piece in the collection is crafted with premium sustainable leather, featuring clean lines and functional design that embodies <em>Luvigo</em>'s core values of elegance and timelessness.</p>
+                <p>As the first glimpse of what's to come, this teaser piece <font color="black"><b>incorporates the color of American copper green</b></font>. From gleaming copper to ageless green, the American copper green symbolizes the transformation of history and enduring values amidst change. <em>Luvigo</em> incorporates the American copper green to showcase the weathered yet steadfast spirit of American culture.</p>
+                <p>This <em>Luvigo</em>'s American copper green bag sets the tone for the full collection, which will make its highly anticipated debut <b>at <em>Luvigo</em>'s March runway show</b>, promising more innovative designs celebrating the American culture.</p>
+                <p><em>Luvigo</em> 2026 American Collection redefines modern luxury for the global contemporary consumer. If you are interested in this cultural marketing campaign, please subscribe with your email to receive updates and early access. <font color="black"><b>Subscribe through this page to receive 20% off this teaser piece via an email link.</b></font></p>
+            </div>
+        </div>
+    </section>
+    <section class="subscribe" id="subscribeSection">
+        <h3 id="subscribeTitle">Inspire me with all the latest <em>Luvigo</em> news</h3>
+        <form class="subscribe-form" id="emailSubscribeForm">
+            <input type="email" class="subscribe-input" placeholder="Your email address" required name="email" id="emailInput">
+            <button type="submit" class="subscribe-btn" id="submitBtn">Confirm</button>
+        </form>
+        <p class="privacy-text">
+            By subscribing, you agree to our <b>Privacy Policy</b>. We only send Luvigo news and you can unsubscribe anytime.
+        </p>
+        <div id="privacyPolicy" style="margin-top: 3rem; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
+            <h4 style="font-size: 1.2rem; margin-bottom: 1rem; color: #999;">Privacy Policy</h4>
+            <p style="font-size: 0.9rem; line-height: 1.6;">
+                1. We collect your email address only for sending the updates of Luvigo.<br>
+                2. We will not share your email address with any third parties.<br>
+                3. You can unsubscribe at any time by clicking the unsubscribe link in our emails.
+            </p>
+        </div>
+    </section>
+    <div class="float-subscribe">
+        <p class="float-tip">Subscribe to get 20% off now!</p>
+        <form class="float-subscribe-form" id="floatEmailForm">
+            <input type="email" class="float-subscribe-input" placeholder="Your email address" required name="floatEmail" id="floatEmailInput">
+            <button type="submit" class="float-subscribe-btn" id="floatSubmitBtn">Subscribe</button>
+        </form>
+    </div>
+    <script>
+        const heroSection = document.getElementById('hero');
+        const brandIntroSection = document.getElementById('brandIntro');
+        const subscribeTitle = document.getElementById('subscribeTitle');
+        const subscribeSection = document.getElementById('subscribeSection');
+        const floatSubscribe = document.querySelector('.float-subscribe');
+        
+        window.addEventListener('scroll', function() {
+            const scrollY = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.body.offsetHeight;
+            
+            if (scrollY > windowHeight / 4) {
+                heroSection.classList.add('scrolled');
+                brandIntroSection.classList.add('active');
+            } else {
+                heroSection.classList.remove('scrolled');
+                brandIntroSection.classList.remove('active');
+            }
+            const subscribeTop = subscribeSection.getBoundingClientRect().top;
+            if (subscribeTop < windowHeight * 0.8) {
+                subscribeTitle.classList.add('active');
+                floatSubscribe.style.display = 'none';
+            } else {
+                floatSubscribe.style.display = 'block';
+            }
+        });
+
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbymnKI37s-CSeu5l85C_rN9pUlHP1yg4HZDCUt-Oo7_-s2y3m7Z1xAtp1hKBYi377Bw/exec";
+        const subscribeForm = document.getElementById('emailSubscribeForm');
+        const emailInput = document.getElementById('emailInput');
+        const submitBtn = document.getElementById('submitBtn');
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        subscribeForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = emailInput.value.trim();
+            if (!validateEmail(email)) {
+                alert('Please enter a valid email address!');
+                return;
+            }
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `email=${encodeURIComponent(email)}`
+                });
+                const result = await response.json();
+                if (result.status === 'success') {
+                    alert(`Thank you for subscribing with ${email}! You'll receive the latest Luvigo news soon.`);
+                    subscribeForm.reset();
+                } else if (result.status === 'duplicate') {
+                    alert('This email has already been subscribed!');
+                } else {
+                    alert(result.message || 'Submission failed, please try again.');
+                }
+            } catch (err) {
+                alert('Network error, please check your internet and try again.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Confirm';
+            }
+        });
+        const floatForm = document.getElementById('floatEmailForm');
+        const floatEmailInput = document.getElementById('floatEmailInput');
+        const floatSubmitBtn = document.getElementById('floatSubmitBtn');
+        floatForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = floatEmailInput.value.trim();
+            if (!validateEmail(email)) {
+                alert('Please enter a valid email address!');
+                return;
+            }
+            floatSubmitBtn.disabled = true;
+            floatSubmitBtn.textContent = 'Submitting...';
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `email=${encodeURIComponent(email)}`
+                });
+                const result = await response.json();
+                if (result.status === 'success') {
+                    alert(`Thank you for subscribing with ${email}!`);
+                    floatForm.reset();
+                } else if (result.status === 'duplicate') {
+                    alert('This email has already been subscribed!');
+                } else {
+                    alert(result.message || 'Submission failed, please try again.');
+                }
+            } catch (err) {
+                alert('Network error, please check your internet and try again.');
+            } finally {
+                floatSubmitBtn.disabled = false;
+                floatSubmitBtn.textContent = 'Subscribe';
+            }
+        });
+    </script>
+</body>
+</html>
